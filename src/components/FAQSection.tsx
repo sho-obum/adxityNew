@@ -3,13 +3,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FAQSection = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const faqs = [
     {
       question: "How long does integration take?",
-      answer:
-        "Most developers integrate adpocket.ai in under 30 minutes with our lightweight SDK.",
+      answer: "Most developers integrate adpocket.ai in under 30 minutes with our lightweight SDK.",
     },
     {
       question: "Is there any revenue share?",
@@ -17,22 +16,21 @@ const FAQSection = () => {
     },
     {
       question: "Which ad networks do you support?",
-      answer:
-        "We partner with over 30 top-tier networks including Google, Meta, and AppLovin.",
+      answer: "We partner with over 30 top-tier networks including Google, Meta, and AppLovin.",
     },
     {
       question: "Is my user data safe?",
-      answer:
-        "Absolutely. We are fully GDPR and CCPA compliant with strict data policies.",
+      answer: "Absolutely. We are fully GDPR and CCPA compliant with strict data policies.",
     },
   ];
 
-  const toggleFAQ = (index) => {
+  // Properly type the index param as number
+  const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Custom chevron icon component
-  const ChevronIcon = ({ isOpen }) => (
+  // Custom chevron icon component, with typed props
+  const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
     <motion.svg
       animate={{ rotate: isOpen ? 180 : 0 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -65,7 +63,7 @@ const FAQSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="border border-gray-700  bg-gray-800/50 backdrop-blur overflow-hidden shadow-md"
+                className="border border-gray-700 bg-gray-800/50 backdrop-blur overflow-hidden shadow-md"
               >
                 <button
                   onClick={() => toggleFAQ(index)}

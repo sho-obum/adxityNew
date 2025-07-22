@@ -106,7 +106,7 @@ export default function LogoTicker() {
               {LOGOS.map((logo, i) => (
                 <img
                   key={i}
-                  src={(logo.src as string) || "/placeholder.svg"}
+                  src={(logo.src as unknown as string) || "/placeholder.svg"}
                   alt={logo.alt}
                   height={logoHeight}
                   style={{

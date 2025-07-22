@@ -4,6 +4,7 @@ import {
   ShieldCheckIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 // Sample illustration or logo, replace with your desired <img>
 const PHOTO_SRC = "/adxity-dashboard.png"; // Change to your image's path
@@ -27,11 +28,14 @@ export default function WhyChoose() {
           bg-gradient-to-br from-blue-700/40 to-blue-800/20
         "
         >
-          <img
+          <Image
             src={PHOTO_SRC}
             alt="Adxity DSP Dashboard"
+            width={320}
+            height={320}
             className="object-contain w-80 h-80 md:w-[320px] md:h-[320px] rounded-2xl shadow-xl border border-white/10"
           />
+
           {/* Decorative blob */}
           <div
             className="
