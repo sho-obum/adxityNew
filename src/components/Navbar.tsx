@@ -1,6 +1,13 @@
-'use client';
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 import { BoltIcon, UsersIcon, ChartBarIcon } from "@heroicons/react/24/outline";
+import logo from "../assets/images/logosaas.png";
+import Image from "next/image";
+
+type IconName = keyof typeof iconMap;
+type NavbarProps = {
+  onContactClick?: () => void;
+};
 
 const NAV_ITEMS = [
   {
@@ -27,7 +34,7 @@ const NAV_ITEMS = [
     ],
   },
   { label: "Pricing", href: "/pricing" },
-];  
+];
 
 const iconMap = {
   BoltIcon,
@@ -35,7 +42,7 @@ const iconMap = {
   ChartBarIcon,
 };
 
-export default function Navbar() {
+export default function Navbar({ onContactClick }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
@@ -60,11 +67,9 @@ export default function Navbar() {
       }
     }
     if (solutionsOpen) document.addEventListener("mousedown", handleClick);
-    return () =>
-      document.removeEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, [solutionsOpen]);
 
-  // Accessibility: close mobile overlay on navigation
   function closeAll() {
     setMenuOpen(false);
     setMobileSolutionsOpen(false);
@@ -81,11 +86,14 @@ export default function Navbar() {
         {/* Brand */}
         <a
           href="/"
-          className="text-2xl font-bold font-ibrand text-white select-none tracking-tight"
+          className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-200 bg-clip-text text-transparent drop-shadow-md select-none"
           style={{ fontFamily: "'Ibrand', sans-serif" }}
           aria-label="AdxCity home"
         >
-          Adxity.com
+          <div className="inline-flex justify-center items-center gap-2">
+            <Image src={logo} alt="logo" className="h-8 w-auto" />
+            <p>Adxity.com</p>
+          </div>
         </a>
 
         {/* Desktop Nav */}
@@ -119,9 +127,12 @@ export default function Navbar() {
             {/* Glassmorphic Dropdown */}
             <div
               id="nav-solutions-menu"
-              className={`absolute left-0 mt-2 min-w-[320px] rounded-xl overflow-hidden shadow-2xl duration-200 origin-top
-                backdrop-blur-lg bg-black/70 ring-1 ring-white/10
-                ${solutionsOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
+              className={`absolute left-0 mt-2 min-w-[320px] rounded-xl overflow-hidden shadow-2xl duration-200 origin-top backdrop-blur-lg bg-black/70 ring-1 ring-white/10
+                ${
+                  solutionsOpen
+                    ? "opacity-100 scale-100 pointer-events-auto"
+                    : "opacity-0 scale-95 pointer-events-none"
+                }
               `}
               role="menu"
               aria-label="Solutions Submenu"
@@ -129,7 +140,7 @@ export default function Navbar() {
               onMouseLeave={() => setSolutionsOpen(false)}
             >
               {NAV_ITEMS[0].submenu?.map((item) => {
-                const Icon = iconMap[item.icon as keyof typeof iconMap];
+                const Icon = iconMap[item.icon as IconName];
                 return (
                   <a
                     key={item.label}
@@ -139,14 +150,20 @@ export default function Navbar() {
                     tabIndex={solutionsOpen ? 0 : -1}
                   >
                     {/* Left gradient bar with icon */}
-                    <div className={
+                    <div
+                      className={
                         "flex items-center justify-center w-12 h-12 rounded-lg " +
                         "bg-gradient-to-br from-blue-500 to-blue-700 " +
                         "group-hover:scale-105 group-hover:shadow-xl transition-all duration-200 " +
                         "ring-1 ring-white/10"
                       }
                     >
-                      {Icon && <Icon className="w-6 h-6 text-white" aria-hidden="true" />}
+                      {Icon && (
+                        <Icon
+                          className="w-6 h-6 text-white"
+                          aria-hidden="true"
+                        />
+                      )}
                     </div>
                     {/* Text */}
                     <div>
@@ -162,20 +179,21 @@ export default function Navbar() {
               })}
             </div>
           </div>
-          {/* Pricing */}
+          {/*Case Studies */}
           <a
             className="px-4 py-2 rounded-md text-white hover:bg-white/10 transition-colors"
             href="/pricing"
           >
-            Pricing
+           Case Studies
           </a>
           {/* CTA */}
-          <a
+          <button
             className="ml-2 px-5 py-2 rounded-md bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition"
-            href="/get-started"
+            onClick={onContactClick}
+            type="button"
           >
-            Get Started
-          </a>
+            Get in Touch
+          </button>
         </div>
 
         {/* Hamburger */}
@@ -253,7 +271,7 @@ export default function Navbar() {
               className="pl-2 mb-2 space-y-2"
             >
               {NAV_ITEMS[0].submenu?.map((item) => {
-                const Icon = iconMap[item.icon as keyof typeof iconMap];
+                const Icon = iconMap[item.icon as IconName];
                 return (
                   <a
                     key={item.label}
@@ -268,10 +286,17 @@ export default function Navbar() {
                   >
                     {/* Icon */}
                     <span className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg ring-1 ring-white/10">
-                      {Icon && <Icon className="w-5 h-5 text-white" aria-hidden="true" />}
+                      {Icon && (
+                        <Icon
+                          className="w-5 h-5 text-white"
+                          aria-hidden="true"
+                        />
+                      )}
                     </span>
                     <span>
-                      <div className="font-semibold text-white">{item.label}</div>
+                      <div className="font-semibold text-white">
+                        {item.label}
+                      </div>
                       <div className="text-xs text-blue-100 opacity-90">
                         {item.description}
                       </div>
@@ -281,22 +306,25 @@ export default function Navbar() {
               })}
             </div>
           )}
-          {/* Pricing */}
+          {/*Case Studies */}
           <a
             href="/pricing"
             className="px-4 py-3 rounded-md hover:bg-white/10"
             onClick={closeAll}
           >
-            Pricing
+           Case Studies
           </a>
           {/* CTA */}
-          <a
-            href="/get-started"
+          <button
             className="w-full mt-3 px-5 py-3 rounded-md bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition text-center"
-            onClick={closeAll}
+            onClick={() => {
+              if (onContactClick) onContactClick();
+              closeAll();
+            }}
+            type="button"
           >
             Get Started
-          </a>
+          </button>
         </nav>
       </div>
     </nav>

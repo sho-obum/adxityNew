@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 
+// Steps data (use your existing STEPS array)
 const STEPS = [
   {
     number: "1",
@@ -32,125 +34,107 @@ export default function HowItWorks() {
       </div>
 
       {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold font-ibrand text-white text-center mb-10 drop-shadow">
+      <motion.h2
+        initial={{ opacity: 0, y: -25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, type: "spring", bounce: 0.38 }}
+        viewport={{ once: true }}
+        className="text-3xl md:text-4xl font-bold font-ibrand text-center mb-10 drop-shadow text-white"
+        style={{
+          background: "linear-gradient(90deg,#51e7fa 20%,#3761fa 85%,#80e8fc 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          textShadow: "0 0 14px #1ee9ff88"
+        }}
+      >
         How It Works
-      </h2>
+      </motion.h2>
 
-      {/* Mobile: Scroll Stack */}
-      <div className="
-        block md:hidden w-full max-w-xl mx-auto h-[75vh] overflow-y-auto
-        snap-y snap-mandatory
-        scrollbar-thin
-      ">
+      {/* Grid layout */}
+      <div className="relative max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {STEPS.map((step, idx) => (
-          <div
+          <motion.div
             key={step.title}
-            className={`
-              min-h-[75vh] flex flex-col justify-center items-center
-              snap-center p-6 relative
-              group transition-transform duration-300
-            `}
+            initial={{ opacity: 0, y: 64 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: idx * 0.1 + 0.15, type: "spring", damping: 18 }}
+            viewport={{ once: true }}
+            className="relative group bg-gradient-to-br from-[#182843] via-[#1e2a4d] to-[#173063ee] border border-cyan-200/10 rounded-2xl shadow-xl px-6 py-8 flex flex-col items-center text-center backdrop-blur-md
+                  hover:border-cyan-400/50 hover:shadow-cyan-400/20 transition-all"
           >
-            {/* Animated Border/Glow */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-400/15 to-blue-800/15 opacity-80 blur-[2px] z-0 pointer-events-none"></div>
-
-            {/* Card Content */}
-            <div className="
-              relative z-10 w-full max-w-[90vw] bg-neutral-900/90
-              border border-blue-800/30
-              rounded-2xl shadow-2xl backdrop-blur-lg px-4 py-8
-              flex flex-col items-center
-              transition-shadow
-              group-hover:shadow-blue-500/30
-            ">
-              <div className="text-lg font-semibold text-blue-300 mb-2   uppercase">
-                Step {step.number}
+            {/* Animated number badge */}
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
+              <div className={`bg-gradient-to-br from-cyan-400 via-blue-400 to-blue-800 rounded-full w-14 h-14 flex items-center justify-center shadow-lg shadow-cyan-400/30
+                border-4 border-neutral-950/80 relative`}>
+                <span className="text-white text-2xl font-extrabold drop-shadow">{step.number}</span>
+                <span className="absolute -right-2 -bottom-2 w-5 h-5 bg-cyan-400/90 rounded-full blur-sm opacity-70" />
               </div>
-              <div className="font-bold text-white text-xl mb-3 font-ibrand drop-shadow">
-                {step.title}
-              </div>
-              <p className="text-blue-100 text-center text-base leading-relaxed mb-2">
-                {step.desc}
-              </p>
-
-              {idx === 0 && (
-                <>
-                  <p className="text-[15px] text-cyan-200/90 font-medium text-center px-2 md:px-5 mb-2 tracking-tight animate-pulse drop-shadow-sm">
-                    {step.details}
-                  </p>
-                  <div className="mt-4 flex flex-col items-center">
-                    <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-cyan-600/80 to-blue-800/80 text-cyan-100 shadow-md font-semibold text-xs md:text-sm tracking-wider uppercase ring-2 ring-cyan-500/30 animate-glow hover:scale-105 transition-transform">
-                      <svg className="w-4 h-4 text-cyan-200 animate-bounce-slow" fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v14m0 0l-4-4m4 4l4-4" />
-                      </svg>
-                      Scroll to learn more
-                    </span>
-                  </div>
-                </>
-              )}
-
-              {idx > 0 && (
-                <p className="text-slate-400 text-xs md:text-sm leading-relaxed mt-2">
-                  {step.details}
-                </p>
-              )}
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Desktop: Row of Cards */}
-      <div className="hidden md:flex flex-row gap-8 justify-center max-w-5xl mx-auto">
-        {STEPS.map((step, idx) => (
-          <div
-            key={step.title}
-            className={`
-              flex-1 flex flex-col items-center px-4 py-8 bg-neutral-900/90
-              rounded-2xl shadow-2xl border border-blue-800/30
-              backdrop-blur-sm
-              transition-transform duration-300 group
-              hover:-translate-y-2 hover:shadow-blue-500/30
-              relative
-            `}
-          >
-            <div className="absolute inset-0 pointer-events-none rounded-2xl z-0 group-hover:shadow-[0_0_32px_8px_rgba(0,180,255,0.18)] transition"></div>
-            <div className="text-lg font-semibold text-blue-300 mb-2 tracking-widest">
-              Step {step.number}
-            </div>
-            <div className="font-bold text-white text-lg mb-2 font-ibrand">
+            <div className="h-8" />
+            <h4 className="text-lg font-bold font-ibrand mb-1 bg-gradient-to-r from-cyan-200 to-blue-300 bg-clip-text text-transparent drop-shadow">
               {step.title}
-            </div>
-            <p className="text-blue-100 text-center text-base leading-relaxed mb-2">
-              {step.desc}
-            </p>
-            <p className="text-slate-400 text-xs md:text-sm leading-relaxed mt-2">
-              {step.details}
-            </p>
-            {/* Connectors between cards (desktop only) */}
+            </h4>
+            <p className="text-cyan-100/90 font-medium text-base mb-2">{step.desc}</p>
+            <p className="text-blue-100 text-xs mt-1">{step.details}</p>
+            {/* Arrow between steps – only on md+ screens, not after the last step */}
             {idx < STEPS.length - 1 && (
-              <div className="hidden md:block absolute right-0 top-1/2 w-5 h-0.5 bg-gradient-to-r from-cyan-400/60 to-transparent" />
+              <div className="hidden lg:block absolute right-[-33px] top-1/2 -translate-y-1/2 z-20">
+                <svg width="46" height="24" viewBox="0 0 46 24" fill="none" className="">
+                  <path
+                    d="M2 12h40m0 0l-7-7m7 7l-7 7"
+                    stroke="#38bdf8"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    filter="url(#glow)"
+                  />
+                  <defs>
+                    <filter id="glow" x="0" y="0" width="46" height="24" filterUnits="userSpaceOnUse">
+                      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                      <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+                </svg>
+              </div>
             )}
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      {/* Animate-glow and bounce-slow keyframes */}
-      <style jsx global>{`
-        .animate-glow {
-          animation: glowAni 2.2s ease-in-out infinite alternate;
-        }
-        @keyframes glowAni {
-          0% { box-shadow: 0 0 6px 0 #22d3ee60, 0 0 0px 0 #2563eb60; }
-          100% { box-shadow: 0 0 18px 5px #22d3f1c0, 0 0 12px 8px #2563eb70; }
-        }
-        .animate-bounce-slow {
-          animation: bounceSlow 1.6s infinite cubic-bezier(0.77,0,0.175,1) both;
-        }
-        @keyframes bounceSlow {
-          0%,100% { transform: translateY(0);}
-          50% { transform: translateY(4px);}
-        }
-      `}</style>
+      {/* Mobile: arrows below cards (optional for clarity) */}
+      <div className="md:hidden w-full flex flex-col items-center">
+        {[0,1].map(idx => (
+          <svg
+            key={idx}
+            width="38"
+            height="30"
+            viewBox="0 0 38 30"
+            fill="none"
+            className="my-[-12px]"
+          >
+            <path
+              d="M19 2v24m0 0l8-8m-8 8l-8-8"
+              stroke="#38bdf8"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#glow)"
+            />
+            <defs>
+              <filter id="glow" x="0" y="0" width="38" height="30" filterUnits="userSpaceOnUse">
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+          </svg>
+        ))}
+      </div>
     </section>
   );
 }

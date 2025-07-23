@@ -5,9 +5,9 @@ import {
   SparklesIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import DSPLogo from "../assets/images/DSPss.png"
 
 // Sample illustration or logo, replace with your desired <img>
-const PHOTO_SRC = "/adxity-dashboard.png"; // Change to your image's path
 
 export default function WhyChoose() {
   return (
@@ -29,7 +29,7 @@ export default function WhyChoose() {
         "
         >
           <Image
-            src={PHOTO_SRC}
+            src={DSPLogo}
             alt="Adxity DSP Dashboard"
             width={320}
             height={320}

@@ -1,28 +1,32 @@
-'use client'
+"use client";
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useAnimationFrame } from "framer-motion";
+import GradientText from "../blocks/TextAnimations/GradientText/GradientText";
 
-// === LOGO PLACEHOLDERS (use your imports here) ===
-import acmeLogo from "../assets/images/acme.png";
-import quantumLogo from "../assets/images/quantum.png";
-import echoLogo from "../assets/images/echo.png";
-import celestialLogo from "../assets/images/celestial.png";
-import pulseLogo from "../assets/images/pulse.png";
-import apexLogo from "../assets/images/apex.png";
+import appsflyer from "../assets/images/appflyer.png";
+import singular from "../assets/images/sing.png";
+import adjust from "../assets/images/adjust.png";
+import branch from "../assets/images/branch.png";
+import Airbridge from "../assets/images/airbridge.png";
+import DreamData from "../assets/images/dreamdata.png";
+import Kochava from "../assets/images/kochava.png";
+
+import Image from "next/image";
 
 const IMAGES = [
-  { src: acmeLogo, alt: "Acme Logo" },
-  { src: quantumLogo, alt: "Quantum Logo" },
-  { src: echoLogo, alt: "Echo Logo" },
-  { src: celestialLogo, alt: "Celestial Logo" },
-  { src: pulseLogo, alt: "Pulse Logo" },
-  { src: apexLogo, alt: "Apex Logo" },
+  { src: appsflyer, alt: "Acme Logo" },
+  { src: singular, alt: "Acme Logo" },
+  { src: adjust, alt: "Acme Logo" },
+  { src: branch, alt: "Acme Logo" },
+  { src: Airbridge, alt: "Acme Logo" },
+  { src: Kochava, alt: "Acme Logo" },
+  { src: DreamData, alt: "Acme Logo" },
 ];
 
-const logoHeight = 38;         // px, edit for your logomark height
-const logoGap = 64;            // px, space between logos
-const speedNormal = 32;        // px/sec
-const speedFast = 96;          // px/sec (boost on hover/scroll)
+const logoHeight = 80; // px, edit for your logomark height
+const logoGap = 25; // px, space between logos
+const speedNormal = 32; // px/sec
+const speedFast = 96; // px/sec (boost on hover/scroll)
 
 export default function LogoTicker() {
   const [paused, setPaused] = useState(false);
@@ -40,7 +44,7 @@ export default function LogoTicker() {
     if (motionDivRef.current) {
       setLoopWidth(motionDivRef.current.scrollWidth / 2);
     }
-  }, [IMAGES.length]); // Rerun if logo images change
+  }, []); // Only runs on mount: IMAGES is static
 
   // Animation logic
   const x = useRef(0);
@@ -66,9 +70,18 @@ export default function LogoTicker() {
   return (
     <section className="w-full bg-black py-10">
       <div className="max-w-6xl mx-auto px-0 md:px-12 relative">
-        <h2 className="text-center text-white"> Seamless Integrations </h2>
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+          showBorder={false}
+          className="max-w-4xl text-4xl md:text-5xl font-bolder mb-2 leading-normal"
+        >
+          Seamless Integrations
+        </GradientText>
+
         <p className="text-center text-blue-100/70 text-sm md:text-base mb-6 tracking-wide">
-         Connect easily with leading Mobile Measurement Partners and data platforms
+          Connect easily with leading Mobile Measurement Partners and data
+          platforms
         </p>
         <div
           className="relative w-full overflow-hidden"
@@ -79,11 +92,15 @@ export default function LogoTicker() {
           {/* Vignette gradients (left/right) */}
           <div
             className="absolute left-0 top-0 w-24 h-full z-10 pointer-events-none"
-            style={{ background: "linear-gradient(90deg, #000 75%, transparent)" }}
+            style={{
+              background: "linear-gradient(90deg, #000 75%, transparent)",
+            }}
           />
           <div
             className="absolute right-0 top-0 w-24 h-full z-10 pointer-events-none"
-            style={{ background: "linear-gradient(270deg, #000 75%, transparent)" }}
+            style={{
+              background: "linear-gradient(270deg, #000 75%, transparent)",
+            }}
           />
           {/* Logos row */}
           <div
@@ -104,7 +121,7 @@ export default function LogoTicker() {
               aria-label="Scrolling trusted partner logos"
             >
               {LOGOS.map((logo, i) => (
-                <img
+                <Image
                   key={i}
                   src={(logo.src as unknown as string) || "/placeholder.svg"}
                   alt={logo.alt}
@@ -112,8 +129,8 @@ export default function LogoTicker() {
                   style={{
                     height: logoHeight,
                     width: "auto",
-                    filter: "brightness(0.97) grayscale(1)",
-                    opacity: 0.77,
+                    filter: "brightness(0) invert(1)", // for white logos!
+                    opacity: 0.93,
                     transition: "filter .3s, opacity .3s",
                   }}
                   className="block mx-5 select-none pointer-events-none"
