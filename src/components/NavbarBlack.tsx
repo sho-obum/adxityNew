@@ -42,7 +42,7 @@ const iconMap = {
   ChartBarIcon,
 };
 
-export default function Navbar({ onContactClick }: NavbarProps) {
+export default function NavbarBlack({ onContactClick }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
@@ -77,27 +77,14 @@ export default function Navbar({ onContactClick }: NavbarProps) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-        scrolled ? "bg-black" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 bg-black mb-2 `}
       aria-label="Main Navigation"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
         {/* Brand */}
-        {/* <a
-          href="/"
-          className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-200 bg-clip-text text-transparent drop-shadow-md select-none"
-          style={{ fontFamily: "'Ibrand', sans-serif" }}
-          aria-label="AdxCity home"
-        >
-          <div className="inline-flex justify-center items-center gap-2">
-            <Image src={logo} alt="logo" className="h-8 w-auto" />
-            <p>Adxity.com</p>
-          </div>
-        </a> */}
         <a
           href="/"
-          className="text-xl md:text-2xl font-bold text-white drop-shadow-md select-none"
+          className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-200 bg-clip-text text-transparent drop-shadow-md select-none"
           style={{ fontFamily: "'Ibrand', sans-serif" }}
           aria-label="AdxCity home"
         >
@@ -191,12 +178,12 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             </div>
           </div>
           {/*Case Studies */}
-          {/* <a
+          <a
             className="px-4 py-2 rounded-md text-white hover:bg-white/10 transition-colors"
             href="/pricing"
           >
-          Request a Demo
-          </a> */}
+            Case Studies
+          </a>
           {/* CTA */}
           <button
             className="ml-2 px-5 py-2 rounded-md bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition"
@@ -323,7 +310,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             className="px-4 py-3 rounded-md hover:bg-white/10"
             onClick={closeAll}
           >
-           Case Studies
+            Case Studies
           </a>
           {/* CTA */}
           <button

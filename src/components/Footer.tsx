@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 type FooterProps = {
@@ -28,25 +29,21 @@ const Footer: React.FC<FooterProps> = ({
       </div>
       {/* Footer Links */}
       <div className="mb-8 flex flex-wrap justify-center gap-8">
-        <button
-          onClick={onContactClick}
-          className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300"
-        >
-          Contact
-        </button>
-        <button
-          onClick={onPrivacyClick}
-          className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300"
-        >
-          Privacy Policy
-        </button>
-
-        <button
-          onClick={onCareersClick}
-          className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300"
-        >
-          Careers
-        </button>
+        <Link href="/contact-us" target="_blank">
+          <button className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300">
+            Contact Us
+          </button>
+        </Link>
+        <Link href="/privacy-policy" target="_blank">
+          <button className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300">
+            Privacy Policy
+          </button>
+        </Link>
+        <Link href="/about-us" target="_blank">
+          <button className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300">
+            About Us
+          </button>
+        </Link>
       </div>
       {/* Copyright */}
       <div className="pt-8 border-t border-cyan-400/10">

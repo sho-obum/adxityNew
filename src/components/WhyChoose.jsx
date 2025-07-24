@@ -1,66 +1,98 @@
+"use client";
 import React from "react";
 import {
   BoltIcon,
   ShieldCheckIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import DSPLogo from "../assets/images/DSPss.png"
-
-// Sample illustration or logo, replace with your desired <img>
+import DSPLogo from "../assets/images/DSPss.png";
 
 export default function WhyChoose() {
   return (
-    <section className="bg-black flex flex-col md:flex-row items-center justify-center w-full min-h-[480px] p-6 md:p-12">
-      {/* Glassmorphic Card */}
-      <div
+    <section className="bg-black flex flex-col md:flex-row items-center justify-center w-full min-h-[480px] p-0 md:p-8 overflow-x-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 72 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, type: "spring" }}
+        viewport={{ once: true }}
         className="
-        relative flex flex-col md:flex-row w-full max-w-5xl rounded-3xl
-        bg-gradient-to-br from-blue-900/60 via-black/75 to-blue-600/30
-        backdrop-blur-xl shadow-2xl border border-white/15 ring-1 ring-blue-200/15
-        overflow-hidden
-      "
-      >
-        {/* Left: Image */}
-        <div
-          className="
-          relative md:w-1/2 w-full min-h-[260px] flex items-center justify-center
-          bg-gradient-to-br from-blue-700/40 to-blue-800/20
+          relative flex flex-col md:flex-row w-full max-w-5xl rounded-3xl
+          bg-gradient-to-br from-blue-900/60 via-black/75 to-blue-600/30
+          backdrop-blur-xl shadow-2xl border border-white/15 ring-1 ring-blue-200/15
+          overflow-hidden
+          min-h-[420px]
         "
+      >
+        {/* Animated Glow & Static Image with Margin */}
+        <div
+          className="relative md:w-1/2 w-full flex items-stretch justify-center overflow-visible m-5 "
+          
         >
-          <Image
-            src={DSPLogo}
-            alt="Adxity DSP Dashboard"
-            width={320}
-            height={320}
-            className="object-contain w-80 h-80 md:w-[320px] md:h-[320px] rounded-2xl shadow-xl border border-white/10"
-          />
-
-          {/* Decorative blob */}
-          <div
-            className="
-            absolute z-0 -left-10 -bottom-14 w-48 h-48 rounded-full
-            bg-gradient-to-br from-blue-400/50 to-sky-600/30 blur-2xl
-            pointer-events-none
-          "
-          />
+          {/* Glow BEHIND image */}
+          <motion.div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{ width: 320, height: 320, zIndex: 1 }}
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 51%", "0% 50%"],
+            }}
+            transition={{
+              repeat: Infinity,
+              repeatType: "loop",
+              duration: 7,
+              ease: "linear",
+            }}
+          >
+            <div
+              className="w-full h-full rounded-full opacity-90"
+              style={{
+                background:
+                  "linear-gradient(120deg,#16e8d0 0%,#577bfa 50%,#1ae6ea 100%)",
+                filter: "blur(56px)",
+                animation: "spinGlow 8s linear infinite",
+              }}
+            />
+          </motion.div>
+          {/* --- Static image (no pan animation), with zIndex above the glow --- */}
+          <div className="relative w-full h-full flex items-center justify-center z-10 object-left">
+            <Image
+              src={DSPLogo}
+              alt="Adxity DSP Dashboard"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center left",
+                userSelect: "none",
+                pointerEvents: "none",
+                borderRadius: "1.25rem", // equals Tailwind rounded-2xl
+                boxShadow: "0 2px 24px 0 #27dae999,0 12px 48px 0 #154eaa61",
+              }}
+              className="w-full h-full rounded-2xl shadow-2xl"
+              draggable={false}
+              priority
+            />
+          </div>
+          <style jsx>{`
+            @keyframes spinGlow {
+              0% {
+                filter: blur(56px) hue-rotate(0deg);
+              }
+              100% {
+                filter: blur(56px) hue-rotate(360deg);
+              }
+            }
+          `}</style>
         </div>
 
-        {/* Right: Text Content */}
-        <div
-          className="
-          md:w-1/2 flex flex-col justify-center p-8 md:p-12 gap-5
-          text-white
-        "
-        >
-          {/* Headline */}
-          <h2 className="text-3xl md:text-4xl font-bold font-ibrand tracking-tight drop-shadow-lg">
+        {/* RIGHT: Content and features */}
+        <div className="md:w-1/2 flex flex-col justify-center p-7 md:p-12 gap-5 text-white z-[2]">
+          <h2 className="text-3xl md:text-4xl font-bold font-ibrand tracking-tight drop-shadow-lg leading-tight">
             Why Agencies Choose{" "}
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-300 bg-clip-text text-transparent">
               Adxity
             </span>
           </h2>
-          {/* Blurb */}
           <p className="text-blue-100 text-base md:text-lg mt-2 opacity-90">
             Adxity empowers agencies with{" "}
             <span className="font-semibold text-white">complete control</span>{" "}
@@ -71,7 +103,6 @@ export default function WhyChoose() {
             . Everything you need for efficient, secure, and data-driven
             programmatic campaigns.
           </p>
-          {/* Feature List */}
           <ul className="mt-4 space-y-2">
             <li className="flex items-center gap-3 text-blue-100 text-base group hover:text-cyan-200 transition">
               <ShieldCheckIcon className="w-5 h-5 text-cyan-300 group-hover:animate-pulse" />
@@ -86,22 +117,20 @@ export default function WhyChoose() {
               Seamless integrations & AI-driven optimization
             </li>
           </ul>
-          {/* Badge */}
-          <div className="w-full gap-4 flex">
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 rounded-full bg-blue-500/25 text-blue-100 text-xs font-semibold font-ibrand tracking-wide backdrop-blur">
+          <div className="w-full gap-4 flex flex-wrap mt-1 mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/25 text-blue-100 text-xs font-semibold font-ibrand tracking-wide backdrop-blur-blur shadow">
               <BoltIcon className="w-4 h-4" />
               Next-Gen DSP
             </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 rounded-full bg-blue-500/25 text-blue-100 text-xs font-semibold font-ibrand tracking-wide backdrop-blur">
-              <BoltIcon className="w-4 h-4" />
-              Next-Gen DSP
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/25 text-blue-100 text-xs font-semibold font-ibrand tracking-wide backdrop-blur-blur shadow">
+              <SparklesIcon className="w-4 h-4" />
+              AI Optimization
             </div>
           </div>
-          {/* CTA */}
           <a
             href="/get-started"
             className="
-              mt-6 inline-block px-7 py-3 rounded-xl font-ibrand font-semibold text-white text-lg
+              mt-4 inline-block px-7 py-3 rounded-xl font-ibrand font-semibold text-white text-lg
               bg-gradient-to-r from-blue-600 to-teal-400 shadow-xl
               hover:scale-105 hover:shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/80
               transition text-center
@@ -110,7 +139,7 @@ export default function WhyChoose() {
             Get Started
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

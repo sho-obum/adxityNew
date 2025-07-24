@@ -60,7 +60,7 @@ export default function HowItWorks() {
             transition={{ duration: 0.55, delay: idx * 0.1 + 0.15, type: "spring", damping: 18 }}
             viewport={{ once: true }}
             className="relative group bg-gradient-to-br from-[#182843] via-[#1e2a4d] to-[#173063ee] border border-cyan-200/10 rounded-2xl shadow-xl px-6 py-8 flex flex-col items-center text-center backdrop-blur-md
-                  hover:border-cyan-400/50 hover:shadow-cyan-400/20 transition-all"
+                  hover:border-cyan-400/50 hover:shadow-cyan-400/20 transition-all cursor-cell  "
           >
             {/* Animated number badge */}
             <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
@@ -71,7 +71,7 @@ export default function HowItWorks() {
               </div>
             </div>
             <div className="h-8" />
-            <h4 className="text-lg font-bold font-ibrand mb-1 bg-gradient-to-r from-cyan-200 to-blue-300 bg-clip-text text-transparent drop-shadow">
+            <h4 className="text-2xl  font-bold font-ibrand mb-1 bg-gradient-to-r from-cyan-200 to-blue-300 bg-clip-text text-transparent drop-shadow">
               {step.title}
             </h4>
             <p className="text-cyan-100/90 font-medium text-base mb-2">{step.desc}</p>

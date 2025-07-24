@@ -65,20 +65,19 @@ export const Hero = ({ onContactClick, onRequestDemoClick }: HeroProps) => (
         <Link href="/request-demo">
           <button
             className="
-            bg-black bg-opacity-80 border border-blue-400 text-blue-100 py-3 px-8 rounded-lg font-semibold text-lg shadow-md
-            transition hover:bg-blue-600 hover:text-white
-            hover:shadow-[0_0_18px_5px_rgba(54,166,255,0.4)]
-            focus:outline-none
-          "
+    bg-black bg-opacity-80 border border-blue-400 text-blue-100 py-3 px-8 rounded-lg font-semibold text-lg shadow-md
+    transition transform hover:scale-105 hover:text-white
+    hover:shadow-[0_0_18px_5px_rgba(54,166,255,0.4)]
+    focus:outline-none
+  "
             style={{
               boxShadow: "0 0 16px 1.5px rgba(35,115,255,0.44)",
               textShadow: "0 2px 8px rgba(60,135,255,0.5)",
             }}
             type="button"
-            onClick={onRequestDemoClick}
           >
             Request a Demo
-          </button>{" "}
+          </button>
         </Link>
       </div>
     </div>
