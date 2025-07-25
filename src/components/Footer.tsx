@@ -39,6 +39,11 @@ const Footer: React.FC<FooterProps> = ({
             Privacy Policy
           </button>
         </Link>
+        <Link href="/term-of-use" target="_blank">
+          <button className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300">
+           Terms of Use
+          </button>
+        </Link>
         <Link href="/about-us" target="_blank">
           <button className="text-blue-100/80 hover:text-cyan-300 font-semibold transition-colors duration-200 focus:outline-none focus:text-cyan-300">
             About Us
