@@ -83,27 +83,29 @@ export default function Navbar({ onContactClick }: NavbarProps) {
       aria-label="Main Navigation"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 flex items-center justify-between">
-        {/* Brand */}
-        {/* <a
-          href="/"
-          className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-blue-200 bg-clip-text text-transparent drop-shadow-md select-none"
-          style={{ fontFamily: "'Ibrand', sans-serif" }}
-          aria-label="AdxCity home"
-        >
-          <div className="inline-flex justify-center items-center gap-2">
-            <Image src={logo} alt="logo" className="h-8 w-auto" />
-            <p>Adxity.com</p>
-          </div>
-        </a> */}
         <a
           href="/"
           className="text-xl md:text-2xl font-bold text-white drop-shadow-md select-none"
           style={{ fontFamily: "'Ibrand', sans-serif" }}
           aria-label="AdxCity home"
         >
-          <div className="inline-flex justify-center items-center gap-2">
-            <Image src={logo} alt="logo" className="h-8 w-auto" />
-            <p>Adxity.com</p>
+          <div className="inline-flex flex-col items-start gap-1">
+            {/* Main Logo Row */}
+            <div className="inline-flex items-center gap-2">
+              <Image src={logo} alt="logo" className="h-10 w-auto" />
+              <p className="text-4xl tracking-wide">Adxity</p>
+            </div>
+            {/* Powered by row */}
+            <div className="flex items-center  text-xs text-gray-400">
+              <span className="text-[9px]">powered by</span>
+              {/* Replace placeholder with actual image when ready */}
+              <div className="h-4 w-[10rem] rounded flex items-center justify-center text-[10px] text-gray-300">
+                <img
+                  src="https://panel.digitarmedia.com/admin/uploads/digitar_logo1754992858.png"
+                  
+                />
+              </div>
+            </div>
           </div>
         </a>
 
@@ -323,7 +325,7 @@ export default function Navbar({ onContactClick }: NavbarProps) {
             className="px-4 py-3 rounded-md hover:bg-white/10"
             onClick={closeAll}
           >
-           Case Studies
+            Case Studies
           </a>
           {/* CTA */}
           <button

@@ -90,7 +90,7 @@ export default function NavbarBlack({ onContactClick }: NavbarProps) {
         >
           <div className="inline-flex justify-center items-center gap-2">
             <Image src={logo} alt="logo" className="h-8 w-auto" />
-            <p>Adxity.com</p>
+            <p>Adxity</p>
           </div>
         </a>
 
